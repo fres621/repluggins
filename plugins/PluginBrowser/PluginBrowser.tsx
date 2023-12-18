@@ -77,25 +77,47 @@ function Plugins({
       <Error heading="An error occurred" message={plugins.error} buttonAction={onClickRetry} />
     );
   return (
-    <div style={{ display: "grid", gridGap: "16px", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))" }}>
+    <div
+      style={{
+        display: "grid",
+        gridGap: "16px",
+        gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
+      }}>
       {plugins.results.map((result) => (
-        <Flex direction={Flex.Direction.VERTICAL} align={Flex.Align.CENTER} style={{ width: "100%", height: "100px", backgroundColor: "var(--background-secondary-alt)", borderRadius: "16px", padding: "12px" }}>
+        <Flex
+          direction={Flex.Direction.VERTICAL}
+          align={Flex.Align.CENTER}
+          style={{
+            width: "100%",
+            height: "100px",
+            backgroundColor: "var(--background-secondary-alt)",
+            borderRadius: "16px",
+            padding: "12px",
+          }}>
           <Text
-            style={{ textOverflow: "ellipsis", whiteSpace: "nowrap", overflow: "hidden", width: "100%", textAlign: "center" }}
+            style={{
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              width: "100%",
+              textAlign: "center",
+            }}
             variant="text-md/bold"
             tag="h2">
             {result.name}
           </Text>
-          <Text
-            variant="text-sm/normal"
-            color="text-muted"
-            tag="span">
+          <Text variant="text-sm/normal" color="text-muted" tag="span">
             by {result.author.name}
           </Text>
           <Flex align={Flex.Align.CENTER} style={{ height: "50px" }}>
             <Text
               variant="text-sm/medium"
-              style={{ marginTop: "5px", overflow: "hidden", textOverflow: "ellipsis", textAlign: "center" }}>
+              style={{
+                marginTop: "5px",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                textAlign: "center",
+              }}>
               {result.description}
             </Text>
           </Flex>
@@ -120,14 +142,27 @@ function Pagination({
       <Flex
         justify={Flex.Justify.CENTER}
         align={Flex.Align.CENTER}
-        style={{ flex: "none", backgroundColor: "var(--background-secondary-alt)", width: "45px", height: "45px", borderRadius: "50%" }}>
+        style={{
+          flex: "none",
+          backgroundColor: "var(--background-secondary-alt)",
+          width: "45px",
+          height: "45px",
+          borderRadius: "50%",
+        }}>
         <Text>Prev</Text>
       </Flex>
       {Array.from({ length: 5 }).map((_, i) => (
         <Flex
           justify={Flex.Justify.CENTER}
           align={Flex.Align.CENTER}
-          style={{ flex: "none", backgroundColor: i + offset === page ? "var(--brand-experiment)" : "var(--background-secondary-alt)", width: "30px", height: "30px", borderRadius: "50%" }}>
+          style={{
+            flex: "none",
+            backgroundColor:
+              i + offset === page ? "var(--brand-experiment)" : "var(--background-secondary-alt)",
+            width: "30px",
+            height: "30px",
+            borderRadius: "50%",
+          }}>
           <Text>{i + offset}</Text>
         </Flex>
       ))}
@@ -135,7 +170,13 @@ function Pagination({
         <Flex
           justify={Flex.Justify.CENTER}
           align={Flex.Align.CENTER}
-          style={{ flex: "none", backgroundColor: "var(--background-secondary-alt)", width: "45px", height: "45px", borderRadius: "50%" }}>
+          style={{
+            flex: "none",
+            backgroundColor: "var(--background-secondary-alt)",
+            width: "45px",
+            height: "45px",
+            borderRadius: "50%",
+          }}>
           <Text>Next</Text>
         </Flex>
       </div>
