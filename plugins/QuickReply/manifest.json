@@ -1,0 +1,20 @@
+{
+  "id": "owo.fres.quickreply",
+  "name": "QuickReply",
+  "description": "Use a keyboard shortcut to reply to messages in chat (Ctrl + ↑ & Ctrl + ↓)",
+  "author": {
+    "name": "fres621",
+    "discordID": "843448897737064448",
+    "github": "fres621"
+  },
+  "version": "1.0.0",
+  "updater": {
+    "type": "github",
+    "id": "fres621/repluggins"
+  },
+  "license": "MIT",
+  "type": "replugged-plugin",
+  "renderer": "/index.tsx",
+  "source": "https://github.com/fres621/repluggins/tree/main/plugins/QuickReply",
+  "image": ["https://i.imgur.com/cGEyOe4.png"]
+}
