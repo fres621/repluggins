@@ -42,7 +42,11 @@ const { createPendingReply, deletePendingReply } = webpack.getByProps<any>("dele
 function onKeyDown(e: KeyboardEvent) {
   const channelId = getChannelId();
   console.log(e);
-  if (channelId && e[cfg.get('modifierKey') as modifierKey || 'ctrlKey'] && (e.code == "ArrowUp" || e.code == "ArrowDown")) {
+  if (
+    channelId &&
+    e[(cfg.get("modifierKey") as modifierKey) || "ctrlKey"] &&
+    (e.code == "ArrowUp" || e.code == "ArrowDown")
+  ) {
     e.stopPropagation();
     const up = e.code == "ArrowUp";
     const channel = ChannelStore.getChannel(channelId);
@@ -57,8 +61,8 @@ function onKeyDown(e: KeyboardEvent) {
 
     const message = replyingId
       ? messages.find(
-        (_, index: number, arr: Message[]) => arr[index + (up ? 1 : -1)]?.id === replyingId,
-      )
+          (_, index: number, arr: Message[]) => arr[index + (up ? 1 : -1)]?.id === replyingId,
+        )
       : MessageStore.getMessages(channelId).toArray().at(-1);
 
     if (!message) return;
@@ -80,4 +84,4 @@ export function stop(): void {
   document.body.removeEventListener("keydown", onKeyDown);
 }
 
-export { Settings } from './Settings'
+export { Settings } from "./Settings";
