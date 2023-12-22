@@ -1,9 +1,24 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { webpack } from "replugged";
+import { settings, webpack } from "replugged";
 import type { Channel, Message } from "discord-types/general";
 import type { ChannelStore as _ChannelStore } from "discord-types/stores";
 import type { Store } from "replugged/dist/renderer/modules/common/flux";
+
+export type modifierKey = "ctrlKey" | "shiftKey" | "altKey";
+
+interface ISettings {
+  modifierKey: string; // should be a modifierKey but it's set to string because otherwise util.useSetting errors, possible TODO figure it out
+}
+
+const defaultSettings = {
+  modifierKey: "ctrlKey",
+} satisfies ISettings;
+
+export const cfg = await settings.init<ISettings, keyof typeof defaultSettings>(
+  "dev.fres621.QuickReply",
+  defaultSettings,
+);
 
 type MessageStore = Store & { getMessages: (channelId: string) => { toArray: () => Message[] } };
 type ChannelStore = Store & _ChannelStore;
@@ -26,7 +41,8 @@ const { createPendingReply, deletePendingReply } = webpack.getByProps<any>("dele
 
 function onKeyDown(e: KeyboardEvent) {
   const channelId = getChannelId();
-  if (channelId && e.ctrlKey && (e.code == "ArrowUp" || e.code == "ArrowDown")) {
+  console.log(e);
+  if (channelId && e[cfg.get('modifierKey') as modifierKey || 'ctrlKey'] && (e.code == "ArrowUp" || e.code == "ArrowDown")) {
     e.stopPropagation();
     const up = e.code == "ArrowUp";
     const channel = ChannelStore.getChannel(channelId);
@@ -41,8 +57,8 @@ function onKeyDown(e: KeyboardEvent) {
 
     const message = replyingId
       ? messages.find(
-          (_, index: number, arr: Message[]) => arr[index + (up ? 1 : -1)]?.id === replyingId,
-        )
+        (_, index: number, arr: Message[]) => arr[index + (up ? 1 : -1)]?.id === replyingId,
+      )
       : MessageStore.getMessages(channelId).toArray().at(-1);
 
     if (!message) return;
@@ -63,3 +79,5 @@ export function start(): void {
 export function stop(): void {
   document.body.removeEventListener("keydown", onKeyDown);
 }
+
+export { Settings } from './Settings'
